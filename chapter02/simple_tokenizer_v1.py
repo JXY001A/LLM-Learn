@@ -12,12 +12,12 @@ class SimpleTokenizerV1 :
         ids = [self.str_to_int[s] for s in preprocessed]
         return ids;
     def decode(self,ids):
-        text = " ".join([self.str_to_int[i] for i in ids])
+        text = " ".join([self.int_to_str[i] for i in ids])
         text = re.sub(r'\s+([,.?!()\'])',r'\1',text)
         return text
     
 
-with open("./the-verdict.txt", "r", encoding="utf-8") as f:
+with open("/Users/jinxianyu/code/LLM-Learn/chapter02/the-verdict.txt", "r", encoding="utf-8") as f:
     raw_text = f.read()
 
 preprocessed = re.split(r'([,.:;?_()\']|--|\s)',raw_text)
@@ -29,4 +29,6 @@ tokenizer = SimpleTokenizerV1(vocab)
 text = """"It's the last he painted, you know," 
            Mrs. Gisburn said with pardonable pride."""
 ids = tokenizer.encode(text)
-print(tokenizer.decode(ids))
+print(ids);
+decode_txt = tokenizer.decode(ids);
+print(decode_txt)
