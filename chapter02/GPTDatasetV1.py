@@ -39,13 +39,13 @@ def create_dataloader_v1(txt,batch_size=4,max_length=256,stride=128,shuffle=True
 with open("/Users/jinxianyu/code/LLM-Learn/chapter02/the-verdict.txt", "r", encoding="utf-8") as f:
     raw_text = f.read()
 
+# stride : 跨度
+# batch_size： 批量
 dataloader = create_dataloader_v1(
-    raw_text, batch_size=1, max_length=4, stride=1, shuffle=False
+    raw_text, batch_size=8, max_length=4, stride=4, shuffle=False
 )
 
 data_iter = iter(dataloader)
-first_batch = next(data_iter)
-print(first_batch)
-
-second_batch = next(data_iter)
-print(second_batch)
+inputs,target = next(data_iter)
+print('input:\n',inputs)
+print('\n target :\n',target)
