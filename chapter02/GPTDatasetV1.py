@@ -59,6 +59,7 @@ inputs,target = next(data_iter)
 vocab_size = 50257
 output_dim = 256
 
+# 词汇量 和 嵌入纬度数 
 token_embedding_layer = torch.nn.Embedding(vocab_size, output_dim)
 
 token_embedding = token_embedding_layer(inputs);

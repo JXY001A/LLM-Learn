@@ -6,7 +6,7 @@ torch.manual_seed(123)
 embedding_layer = torch.nn.Embedding(vocab_size, output_dim)
 
 
-print(embedding_layer.weight)
+# print(embedding_layer.weight)
 
 # tensor([[ 0.3374, -0.1778, -0.1690],
 #         [ 0.9178,  1.5810,  1.3010],
@@ -15,7 +15,9 @@ print(embedding_layer.weight)
 #         [-1.1589,  0.3255, -0.6315],
 #         [-2.8400, -0.7849, -1.4096]]
 
+# input_ids = torch.tensor([[0,1,5],[2,4,3]])
 input_ids = torch.tensor([0,1,5])
+
 print(embedding_layer(input_ids))
 
 # TODO: 所谓嵌入实际上就是首先生成指定数量和维度数的随机权重，然后再将输入的 ids 映射出来
