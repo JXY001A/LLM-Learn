@@ -42,10 +42,24 @@ with open("/Users/jinxianyu/code/LLM-Learn/chapter02/the-verdict.txt", "r", enco
 # stride : 跨度
 # batch_size： 批量
 dataloader = create_dataloader_v1(
-    raw_text, batch_size=8, max_length=4, stride=4, shuffle=False
+    raw_text, batch_size=4, max_length=4, stride=4, shuffle=False
 )
 
 data_iter = iter(dataloader)
 inputs,target = next(data_iter)
-print('input:\n',inputs)
-print('\n target :\n',target)
+# print('input:\n',inputs)
+# print('\n target :\n',target)
+# x = torch.tensor([[1, 2], [3, 4]]);
+# print(x)
+
+# inputs1,target2 = next(data_iter)
+# print('inputs1:\n',inputs1)
+# print('\n target2 :\n',target2)
+
+vocab_size = 6
+output_dim = 3
+
+torch.manual_seed(123)
+embedding_layer = torch.nn.Embedding(vocab_size,output_dim)
+print(embedding_layer.weight)
+

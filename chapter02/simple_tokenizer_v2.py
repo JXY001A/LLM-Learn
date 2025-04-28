@@ -33,3 +33,4 @@ text2 = "In the sunlit terraces of the palace."
 text = " <|endoftext|> ".join((text1, text2))
 
 print(text)
+# print(vocab)
