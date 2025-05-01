@@ -58,6 +58,9 @@ print('atten_weight_2_sum',atten_weight_2.sum())
 
 print('*'*40)
 #TODO: 计算上下文向量 Z : 是所有输入向量的加权总和
+# 1. 计算目标向量与所有输入向量的点积
+# 2. 对注意力权重做归一化 softmax 操作
+# 3. 计算上下文向量：atten_weight_2[i] * x_i 
 
 # 创建一个与 query 结构相同的 context_vec_2 张量
 context_vec_2  = torch.zeros(query.shape);
