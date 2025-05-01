@@ -1,4 +1,5 @@
 from importlib.metadata import version
+import math
 import torch
 
 inputs = torch.tensor(
@@ -28,7 +29,29 @@ for i,x_i in enumerate(inputs):
 # 第一个值最大：因为 query 就是 inputs[0]
 
 # TODO: 简单归一化实现
-atten_weights_2_temp = atten_scores_2 / atten_scores_2.sum()
-print('attention weights:', atten_weights_2_temp)
-print('sum:',atten_weights_2_temp.sum())
+# atten_weights_2_temp = atten_scores_2 / atten_scores_2.sum()
+# print('attention weights:', atten_weights_2_temp)
+# print('sum:',atten_weights_2_temp.sum())
 
+# 相当于： [[e^1, e^2],[e^3, e^4]]，其中 e 为自然对数
+# print(torch.exp(query)) # [(math.e ** 0.43),4),(math.e ** 0.15),4),(math.e ** 0.89),4)]
+
+# print("inputs:",inputs);
+# print('torch.exp(inputs)',torch.exp(inputs))
+# print(torch.exp(inputs).sum(dim=1))
+
+#TODO: 正式归一化实现
+# softmax 函数可以保证注意力权重总是正值，这使得输出可以被解释为概率或相对重要性，其中权重越高表示重要程度越高
+def softmax_naive(x):
+    return torch.exp(x)/torch.exp(x).sum(dim=0)
+
+attn_weights_2_naive = softmax_naive(atten_scores_2)
+print("Attention weights:", attn_weights_2_naive) # tensor([0.2098, 0.2006, 0.1981, 0.1242, 0.1220, 0.1452])
+print("Sum:", attn_weights_2_naive.sum())
+
+# 一般推荐直接使用 torch 官方提供的 softmax 
+atten_weight_2 = torch.softmax(atten_scores_2,dim=0);
+
+print('*'*40)
+print('atten_weight_2',atten_weight_2)
+print('atten_weight_2_sum',atten_weight_2.sum())
