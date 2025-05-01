@@ -55,3 +55,13 @@ atten_weight_2 = torch.softmax(atten_scores_2,dim=0);
 print('*'*40)
 print('atten_weight_2',atten_weight_2)
 print('atten_weight_2_sum',atten_weight_2.sum())
+
+print('*'*40)
+#TODO: 计算上下文向量 Z : 是所有输入向量的加权总和
+
+# 创建一个与 query 结构相同的 context_vec_2 张量
+context_vec_2  = torch.zeros(query.shape);
+for i,x_i in enumerate(inputs):
+    context_vec_2 += atten_weight_2[i] * x_i
+
+print(context_vec_2)
