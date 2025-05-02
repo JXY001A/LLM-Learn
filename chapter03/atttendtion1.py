@@ -79,7 +79,32 @@ for i,x_i in enumerate(inputs):
         atten_scores[i,j] = torch.dot(x_i,x_j)
 
 print("atten_scores",atten_scores);
-print("atten_scores:", atten_scores);
+
+# TODO: 矩阵乘法计算注意力
+print('='*60)
+# demo_tensor = torch.tensor([[1,2,3],[4,5,6]])
+# 将矩阵转置例如：tensor([[1,2,3],[4,5,6]]) 转换为 tensor([[1,4],[2,5],[3,6]])
+# print(demo_tensor.T)
+
+attn_scores = inputs @ inputs.T;
+
+print("attn_scores",attn_scores);
+
+# a = [0.4300, 0.1500, 0.8900]
+# b = [0.4300,0.150,0.8900 ]
+
+# score = 0
+# for i in range(0,len(a)):
+#     print(i)
+#     score+=a[i]*b[i]
+# print(score)   
+
+# 归一化
+print('='*60)
+# 对张量的最内层数据（通常是特征维度）进行 Softmax 转换，使其成为概率分布
+attn_weights = torch.softmax(attn_scores,dim=-1);
+
+print('attn_weights',attn_weights);
 
 
 
