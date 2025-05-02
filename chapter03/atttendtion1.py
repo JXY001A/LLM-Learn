@@ -79,3 +79,7 @@ for i,x_i in enumerate(inputs):
         atten_scores[i,j] = torch.dot(x_i,x_j)
 
 print("atten_scores",atten_scores);
+print("atten_scores:", atten_scores);
+
+
+
