@@ -52,15 +52,15 @@ print("Sum:", attn_weights_2_naive.sum())
 # 一般推荐直接使用 torch 官方提供的 softmax 
 atten_weight_2 = torch.softmax(atten_scores_2,dim=0);
 
-print('*'*40)
+print('='*60)
 print('atten_weight_2',atten_weight_2)
 print('atten_weight_2_sum',atten_weight_2.sum())
 
-print('*'*40)
+print('='*60)
 #TODO: 计算上下文向量 Z : 是所有输入向量的加权总和
-# 1. 计算目标向量与所有输入向量的点积
-# 2. 对注意力权重做归一化 softmax 操作
-# 3. 计算上下文向量：atten_weight_2[i] * x_i 
+# 1. 注意力分数：计算目标向量与所有输入向量的点积
+# 2. 注意力权重：注意力分数做归一化 softmax 操作
+# 3. 计算上下文向量：输入的加权和 (atten_weight_2[i] * x_i)++
 
 # 创建一个与 query 结构相同的 context_vec_2 张量
 context_vec_2  = torch.zeros(query.shape);
@@ -68,3 +68,14 @@ for i,x_i in enumerate(inputs):
     context_vec_2 += atten_weight_2[i] * x_i
 
 print(context_vec_2)
+
+
+# TODO: 计算所有输入次元注意力权重
+print('='*60)
+atten_scores = torch.empty(6,6);
+
+for i,x_i in enumerate(inputs):
+    for j,x_j in enumerate(inputs):
+        atten_scores[i,j] = torch.dot(x_i,x_j)
+
+print("atten_scores",atten_scores);
