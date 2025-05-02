@@ -106,5 +106,11 @@ attn_weights = torch.softmax(attn_scores,dim=-1);
 
 print('attn_weights',attn_weights);
 
+print('='*60)
+# 计算上下文向量
+# attn_weights(5*6), inputs(6*3)
+all_context_vecs = attn_weights @ inputs
+print('all_context_vecs',all_context_vecs)
+
 
 
