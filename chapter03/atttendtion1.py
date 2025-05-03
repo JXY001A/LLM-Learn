@@ -138,16 +138,29 @@ W_value = torch.nn.Parameter(torch.rand(d_in,d_out),requires_grad=False)
 query_2 = x_2 @ W_query
 # key_2 = x_2 @ W_key
 # value_2 = x_2 @ W_value
-print('query_2',query_2)
+# print('query_2',query_2)
 
 
 # TODO: 输入向量 x 与权重矩阵 W 相乘（Wx+b）表示特征的线性组合。
-keys = inputs @ W_key
+keys =   inputs @ W_key
 values = inputs @ W_value
 
 key_2 = keys[1]
 atten_scores_22 = query_2.dot(key_2)
-print(atten_scores_22)
+d_k = keys.shape[-1]
+# 缩放注意力分数并应用 softmax 函数来计算注意力权重
+
+attn_scores_2 = query_2 @ keys.T
+print('attn_scores_2',attn_scores_2)
+atten_weight_2 = torch.softmax(attn_scores_2/(d_k**0.5),dim=-1)
+print('atten_weight_2',atten_weight_2)
+
+# 计算上下文向量： 通过对值向量进行加权求和来计算上下文向量
+context_vec_2 = atten_weight_2 @ values;
+print('context_vec_2',context_vec_2);
+
+
+
 
 
 
