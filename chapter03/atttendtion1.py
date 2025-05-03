@@ -106,11 +106,55 @@ attn_weights = torch.softmax(attn_scores,dim=-1);
 
 print('attn_weights',attn_weights);
 
-print('='*60)
 # 计算上下文向量
+# 自注意力机制的目标是为每个输入元素计算一个上下文向量，该向量结合了其他所有输入元素的信息。
+# 上下文向量（context vector）可以被理解为一种包含了序列中所有元素信息的嵌入向量
 # attn_weights(5*6), inputs(6*3)
 all_context_vecs = attn_weights @ inputs
-print('all_context_vecs',all_context_vecs)
+# print('all_context_vecs',all_context_vecs)
+
+#TODO: 实现带可训练权重的自注意力机制
+# 查询向量（q）、键向量（k）、值向量（v）
+print('='*60)
+
+x_2 = inputs[1];
+# 输入嵌入向量维度数
+d_in = inputs.shape[1] # 3
+# 输出嵌入向量数
+d_out = 2
+
+# 初始化权重矩阵 Wq,Wk,Wv
+# 设置 requires_grad=False 以减少输出中的其他项，
+# 但如果要在模型训练中使用这些权重矩阵，就需要设置 requires_grad=True，以便在训练中更新这些矩阵
+torch.manual_seed(123)
+W_query = torch.nn.Parameter(torch.rand(d_in,d_out),requires_grad=False)
+W_key = torch.nn.Parameter(torch.rand(d_in,d_out),requires_grad=False)
+W_value = torch.nn.Parameter(torch.rand(d_in,d_out),requires_grad=False)
+# 在权重矩阵 W 中，“权重”是“权重参数”的简称，表示在训练过程中优化的神经网络参
+# 数。这与注意力权重是不同的。正如我们已经看到的，注意力权重决定了上下文向量对输入
+# 的不同部分的依赖程度（网络对输入的不同部分的关注程度）。
+# 总之，权重参数是定义网络连接的基本学习系数，而注意力权重是动态且特定于上下文
+# 的值。
+query_2 = x_2 @ W_query
+# key_2 = x_2 @ W_key
+# value_2 = x_2 @ W_value
+print('query_2',query_2)
+
+
+# TODO: 输入向量 x 与权重矩阵 W 相乘（Wx+b）表示特征的线性组合。
+keys = inputs @ W_key
+values = inputs @ W_value
+
+key_2 = keys[1]
+atten_scores_22 = query_2.dot(key_2)
+print(atten_scores_22)
+
+
+
+
+
+
+
 
 
 
