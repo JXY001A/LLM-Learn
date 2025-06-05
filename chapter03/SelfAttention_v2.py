@@ -40,3 +40,10 @@ sa_v1 = SelfAttention_v2(d_in,d_out)
 
 # print(sa_v1(inputs));
 # print('W_query:',sa_v1.W_query)
+
+
+torch.manual_seed(123)
+dropout = torch.nn.Dropout(0.8)
+example = torch.ones(6, 6)
+# print(example)
+print(dropout(example)) 
