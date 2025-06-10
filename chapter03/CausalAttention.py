@@ -7,6 +7,7 @@ class CausalAttention(nn.Module):
         self.W_query = nn.Linear(d_in,d_out,bias=qkv_bias)
         self.W_key = nn.Linear(d_in,d_out,bias=qkv_bias)
         self.W_value = nn.Linear(d_in,d_out,bias=qkv_bias)
+        # 掩码比例，（0～1)
         self.dropout = nn.Dropout(dropout)
         # 虽然在 PyTorch 中使用 register_buffer 并非所有情况下都是必
         # 需的，但在这里具有一些优势。例如，当我们在大语言模型中使用 CausalAttention 类时，缓
