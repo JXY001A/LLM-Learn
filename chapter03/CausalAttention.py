@@ -51,6 +51,9 @@ batch = torch.stack((inputs, inputs), dim=0)
 torch.manual_seed(123)
 context_length = batch.shape[1]
 
-ca = CausalAttention(d_in, d_out, context_length, 0.0) 
-context_vecs = ca(batch)
-print("context_vecs.shape:", context_vecs.shape)
+# ca = CausalAttention(d_in, d_out, context_length, 0.0) 
+# context_vecs = ca(batch)
+# print("context_vecs.shape:", context_vecs.shape)
+
+W_query = nn.Linear(d_in,d_out,bias=False)
+print('W_query(input)',W_query(inputs))
