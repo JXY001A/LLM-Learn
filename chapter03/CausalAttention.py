@@ -56,4 +56,8 @@ context_length = batch.shape[1]
 # print("context_vecs.shape:", context_vecs.shape)
 
 W_query = nn.Linear(d_in,d_out,bias=False)
-print('W_query(input)',W_query(inputs))
+# print('W_query(input)',W_query(inputs))
+
+tensor2d = torch.tensor([[1,2,3],[4,5,6]])
+
+print("tensor2d.view(2,3)",tensor2d.view(1,6))
